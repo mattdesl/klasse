@@ -1,7 +1,9 @@
 var Class = require('./index.js');
 
-///// Test suite
-
+//Here is a mixin, which can contain
+//functions, objects, properties, or whatever else
+//you wish to place on the prototype. You can also use
+//a new Class for a Mixin base. 
 var mixins = {
 
 	length: function() {
@@ -13,15 +15,12 @@ var Vector2 = new Class({
 
 	Mixins: mixins,
 
-	test: "t",
-
 	//We use named functions for the constructor,
 	//but this is optional and only for cleaner debugging.
 	initialize: 
 	function Vector2(x, y) {
 		this.x = x || 0;
 		this.y = y || 0;
-		this.test2 = [];
 	},
 
 	lengthSq: function() {
@@ -37,7 +36,7 @@ var Vector3 = new Class({
 
 	initialize: 
 	function Vector3(x, y, z) {
-		//We can call the constructor 
+		//We can call the constructor like so
 		Vector2.call(this, x, y);
 		this.z = z || 0;
 	},
@@ -51,7 +50,14 @@ var Vector3 = new Class({
 }); 
 
 
-console.log(new Vector2())
+console.log(new Vector2());
 
 
+var Point = new Class({
+
+	Extends: Vector2,
+
+});
+
+console.log(new Point(2))
 

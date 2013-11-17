@@ -1,6 +1,6 @@
 ## klasse
 
-A minimal class/mixin utility for JavaScript, focusing on performance, readability, and composition over inheritance.
+A minimal class/mixin utility for JavaScript, focusing on performance, Node compatibility, and composition over inheritance. 
 
 ## syntax
 
@@ -9,7 +9,11 @@ Inspired by [MooTools](http://mootools.net/docs/core/Class/Class), the syntax is
 ```javascript
 var MyClass = new Class({
 	
+	//Base class to extend from
 	Extends: BaseClass,
+
+	//Optional array of mixins
+	Mixins: [ myMixins ], 
 
 	initialize:
 	function MyClass() {
@@ -17,6 +21,12 @@ var MyClass = new Class({
 	}
 });
 ```
+
+Keywords:
+	
+	- `Extends`: Optional. Specifies the base class for prototype chain.
+	- `Mixins`: Optional. Can be an array, or just a single mixin. A mixin is a lightweight object or a `Class` (i.e. function) which defines methods, properties, and so forth to be added directly to a class prototype. 
+	- `initialize`: Optional. The constructor method, generally a named function for clearer debugging. If not specified, and a base class is given to `Extends`, the constructor will default to calling the base class constructor. Otherwise, an empty constructor will be used.
 
 ## performance & V8 optimizations in mind
 
@@ -33,3 +43,12 @@ Encourages best performance in a number of ways:
 	1. It's ideal for hidden classes in V8 and other engines.
 	2. If you declare an instance property on the object passed to the `Class` constructor, it will be
 	placed in the object's prototype. This leads to an unnecessary lookup in the prototype chain. It also may cause problems for Arrays and Objects, because they are not re-initialized as you might expect.
+
+## Usage
+
+Here is a Vector example, where we use shared code but favour composition rather than inheritance. Inheritance (i.e. Vector3 extends Vector2) would lead to more lookups on the prototype chain.
+
+
+## Getters/Setters
+
+An object passed with a `set` or `get` 

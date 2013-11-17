@@ -30,13 +30,14 @@ function mixin(myClass, mixins) {
 	//Inherits any mixins, such as functions or setter/getters.
 	if (Array.isArray(mixins)) {
 		for (var i=0; i<mixins.length; i++) {
-			extend(myClass, mixins[i]);
+			//Accept Classes (MyClass.prototype) or lightweight objects ( {} )
+			extend(myClass, mixins[i].prototype || mixins[i]);
 		}
 	} else {
 		//We could also mix in functions here, but
 		//then we'd need to mix in properties for consistency.
 		//and that can lead to conflicts on a class that just has set() or get().
-		extend(myClass, mixins);
+		extend(myClass, mixins.prototype || mixins);
 	}
 		
 }
@@ -62,7 +63,14 @@ function Class(definition) {
 		//here since we only call this on class creation (i.e. not object creation).
 		delete definition.initialize;
 	} else {
-		initialize = function () {}; 
+		if (definition.Extends) {
+			var base = definition.Extends;
+			initialize = function () {
+				base.apply(this, arguments);
+			}; 
+		} else {
+			initialize = function () {}; 
+		}
 	}
 
 	if (definition.Extends) {
