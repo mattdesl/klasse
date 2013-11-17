@@ -51,4 +51,33 @@ Here is a Vector example, where we use shared code but favour composition rather
 
 ## Getters/Setters
 
-An object passed with a `set` or `get` 
+If an object in the class definition or a mixin has `get` and/or `set` functions, then we assume its a property. It looks like this:
+
+```javascript
+var Person = new Class({
+	
+	initialize:
+	function Person(age) {
+		this._age = age || 0;
+	},
+
+	/** The 'age' property. */
+	age: {
+		get: function() { 
+			return this._age;
+		},
+
+		set: function(value) {
+			if (value < 0)
+				throw new Error("age must be positive");
+			this._age = value;
+		}
+	}
+});
+
+var p = new Person();
+p.age = 12; // p.age is now 12
+p.age++;    // increments age
+p.age = -1; // throws error
+
+```
