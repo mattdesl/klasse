@@ -24,9 +24,9 @@ var MyClass = new Class({
 
 Keywords:
 	
-	- `Extends`: Optional. Specifies the base class for prototype chain.
-	- `Mixins`: Optional. Can be an array, or just a single mixin. A mixin is a lightweight object or a `Class` (i.e. function) which defines methods, properties, and so forth to be added directly to a class prototype. 
-	- `initialize`: Optional. The constructor method, generally a named function for clearer debugging. If not specified, and a base class is given to `Extends`, the constructor will default to calling the base class constructor. Otherwise, an empty constructor will be used.
+- `Extends`: Optional. Specifies the base class for prototype chain.
+- `Mixins`: Optional. Can be an array, or just a single mixin. A mixin is a lightweight object or a `Class` (i.e. function) which defines methods, properties, and so forth to be added directly to a class prototype. 
+- `initialize`: Optional. The constructor method, generally a named function for clearer debugging. If not specified, and a base class is given to `Extends`, the constructor will default to calling the base class constructor. Otherwise, an empty constructor will be used.
 
 ## performance & V8 optimizations in mind
 
