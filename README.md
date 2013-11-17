@@ -1,10 +1,10 @@
-## klasse
+# klasse
 
-A minimal class/mixin utility for JavaScript, focusing on performance, Node compatibility, and composition over inheritance. 
+A minimal class/mixin utility for JavaScript, focusing on performance, node compatibility, and composition over inheritance. 
 
 ## syntax
 
-Inspired by [MooTools](http://mootools.net/docs/core/Class/Class), the syntax is simple and readable:
+Inspired by [MooTools](http://mootools.net/docs/core/Class/Class) and [jsOOP](https://github.com/MikkoH/jsOOP), the syntax is simple and readable:
 
 ```javascript
 var MyClass = new Class({
@@ -44,10 +44,64 @@ Encourages best performance in a number of ways:
 	2. If you declare an instance property on the object passed to the `Class` constructor, it will be
 	placed in the object's prototype. This leads to an unnecessary lookup in the prototype chain. It also may cause problems for Arrays and Objects, because they are not re-initialized as you might expect.
 
-## Usage
+## Example
 
-Here is a Vector example, where we use shared code but favour composition rather than inheritance. Inheritance (i.e. Vector3 extends Vector2) would lead to more lookups on the prototype chain.
+Here is a Vector example, where we reduce duplicate code but favour composition rather than inheritance. Inheritance (i.e. Vector3 extends Vector2) would lead to unnecessary lookups on the prototype chain.
 
+
+```javascript
+var Class = require('klasse');
+
+//A mixin which contains functions, properties, etc 
+//to be placed on the prototype.
+var mixins = {
+
+	length: function() {
+		return Math.sqrt(this.lengthSq());
+	}
+};
+
+var Vector2 = new Class({
+
+	//Mixin the length. This accepts an array of mixins
+	//(lightweight objects, or a new Class) or you can 
+	//just specify a single mixin.
+	Mixins: mixins,
+
+	//We use named functions for the constructor, which
+	//leads to nicer console logs on Chrome.
+	initialize: 
+	function Vector2(x, y) {
+		this.x = x || 0;
+		this.y = y || 0;
+	},
+
+	lengthSq: function() {
+		var x = this.x, 
+			y = this.y;
+		return ( x * x + y * y );
+	}
+});
+
+var Vector3 = new Class({
+
+	Mixins: mixins,
+
+	initialize: 
+	function Vector3(x, y, z) {
+		//We can call the constructor like so
+		Vector2.call(this, x, y);
+		this.z = z || 0;
+	},
+
+	lengthSq: function() {
+		var x = this.x,
+			y = this.y,
+			z = this.z;
+		return (x * x + y * y + z + z);
+	}
+});
+```
 
 ## Getters/Setters
 
