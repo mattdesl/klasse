@@ -18,10 +18,6 @@ function extend(ctor, definition) {
 }
 
 /**
- * Mixins the given set of objects or classes 
- * @param  {[type]} myClass [description]
- * @param  {[type]} mixins  [description]
- * @return {[type]}         [description]
  */
 function mixin(myClass, mixins) {
 	if (!mixins)
@@ -44,8 +40,6 @@ function mixin(myClass, mixins) {
 
 /**
  * 
- * 
- * @param {[type]} definition [description]
  */
 function Class(definition) {
 	if (!definition)

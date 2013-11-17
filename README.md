@@ -2,6 +2,14 @@
 
 A minimal class/mixin utility for JavaScript, focusing on performance, node compatibility, and composition over inheritance. 
 
+## install
+
+Until this is added to the registry, you can install it like so:
+
+```
+npm install mattdesl/klasse
+```
+
 ## syntax
 
 Inspired by [MooTools](http://mootools.net/docs/core/Class/Class) and [jsOOP](https://github.com/MikkoH/jsOOP), the syntax is simple and readable:
@@ -34,7 +42,7 @@ Encourages best performance in a number of ways:
 
 - Lookups in a long prototype chain can be more costly, so composition over inheritance is encouraged with Mixins.
 - No funky magic going on in the constructor (like in MooTools) -- just what you've defined for `initialize`. This is more ideal for V8 optimizations (hidden classes).
-- Does not clutter objects with caller/super/etc. information. Too many properties in a class will make it less likely to be optimized by V8 and other engines.[1](http://console-to-chrome.appspot.com/#26)
+- Does not clutter objects with caller/super/etc. information. Too many properties in a class will make it less likely to be optimized by V8 and other engines.[1](http://console-to-chrome.appspot.com/#26) 
 
 ## constructor best practices
 
