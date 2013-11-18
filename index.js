@@ -1,19 +1,46 @@
-function extend(ctor, definition) {
+function hasGetterOrSetter(def) {
+	return (!!def.get && typeof def.get === "function") || (!!def.set && typeof def.set === "function");
+}
+
+function getProperty(definition, k, isClassDescriptor) {
+	//This may be a lightweight object, OR it might be a property
+	//that was defined previously.
+	
+	//For simple class descriptors we can just assume its NOT previously defined.
+	var def = isClassDescriptor 
+				? definition[k] 
+				: Object.getOwnPropertyDescriptor(definition, k);
+
+	if (!isClassDescriptor && def.value)
+		def = def.value;
+
+	//This might be a regular property, or it may be a getter/setter the user defined in a class.
+	if ( hasGetterOrSetter(def) ) {
+		if (typeof def.enumerable === "undefined")
+			def.enumerable = true;
+		
+		return def;
+	} else {
+		return false;
+	}
+}
+
+//TODO: On create, 
+//		On mixin, 
+
+function extend(ctor, definition, isClassDescriptor) {
 	for (var k in definition) {
 		if (!definition.hasOwnProperty(k))
 			continue;
 
-		var def = definition[k];
-		var isProp = typeof def === "object" && 
-			 			( (def.get && typeof def.get === "function")
-			 			||(def.set && typeof def.set === "function")
-			 			);
+		var def = getProperty(definition, k);
 
-		if (isProp) {
+		if (def !== false) {
 			Object.defineProperty(ctor.prototype, k, def);
 		} else {
 			ctor.prototype[k] = definition[k];
 		}
+
 	}
 }
 
@@ -23,19 +50,12 @@ function mixin(myClass, mixins) {
 	if (!mixins)
 		return;
 
-	//Inherits any mixins, such as functions or setter/getters.
-	if (Array.isArray(mixins)) {
-		for (var i=0; i<mixins.length; i++) {
-			//Accept Classes (MyClass.prototype) or lightweight objects ( {} )
-			extend(myClass, mixins[i].prototype || mixins[i]);
-		}
-	} else {
-		//We could also mix in functions here, but
-		//then we'd need to mix in properties for consistency.
-		//and that can lead to conflicts on a class that just has set() or get().
-		extend(myClass, mixins.prototype || mixins);
+	if (!Array.isArray(mixins))
+		mixins = [mixins];
+
+	for (var i=0; i<mixins.length; i++) {
+		extend(myClass, mixins[i].prototype || mixins[i]);
 	}
-		
 }
 
 /**
@@ -85,8 +105,9 @@ function Class(definition) {
 	//First, mixin if we can.
 	mixin(initialize, mixins);
 
+
 	//Now we grab the actual definition which defines the overrides.
-	extend(initialize, definition);
+	extend(initialize, definition, true);
 
 	return initialize;
 };

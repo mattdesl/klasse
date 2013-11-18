@@ -17,7 +17,7 @@ Inspired by [MooTools](http://mootools.net/docs/core/Class/Class) and [jsOOP](ht
 ```javascript
 var MyClass = new Class({
 	
-	//Base class to extend from
+	//Optional base class to extend from
 	Extends: BaseClass,
 
 	//Optional array of mixins
@@ -33,7 +33,7 @@ var MyClass = new Class({
 Keywords:
 	
 - `Extends`: Optional. Specifies the base class for prototype chain.
-- `Mixins`: Optional. Can be an array, or just a single mixin. A mixin is a lightweight object or a `Class` (i.e. function) which defines methods, properties, and so forth to be added directly to a class prototype. 
+- `Mixins`: Optional. Can be an array of mixins, or just a single mixin. A mixin is an object or Class which defines methods, properties, and so forth to be added directly to a class prototype. 
 - `initialize`: Optional. The constructor method, generally a named function for clearer debugging. If not specified, and a base class is given to `Extends`, the constructor will default to calling the base class constructor. Otherwise, an empty constructor will be used.
 
 ## performance & V8 optimizations in mind
@@ -52,7 +52,7 @@ Encourages best performance in a number of ways:
 	2. If you declare an instance property on the object passed to the `Class` constructor, it will be
 	placed in the object's prototype. This leads to an unnecessary lookup in the prototype chain. It also may cause problems for Arrays and Objects, because they are not re-initialized as you might expect.
 
-## Example
+## example
 
 Here is a Vector example, where we reduce duplicate code but favour composition rather than inheritance. Inheritance (i.e. Vector3 extends Vector2) would lead to unnecessary lookups on the prototype chain.
 
@@ -60,7 +60,7 @@ Here is a Vector example, where we reduce duplicate code but favour composition 
 ```javascript
 var Class = require('klasse');
 
-//A mixin which contains functions, properties, etc 
+//A lightweight mixin which contains functions, properties, etc 
 //to be placed on the prototype.
 var mixins = {
 
@@ -111,35 +111,35 @@ var Vector3 = new Class({
 });
 ```
 
-## Getters/Setters
+## properties
 
 If an object in the class definition or a mixin has `get` and/or `set` functions, then we assume its a property. It looks like this:
 
 ```javascript
 var Person = new Class({
-	
-	initialize:
+
+	initialize: 
 	function Person(age) {
 		this._age = age || 0;
 	},
 
-	/** The 'age' property. */
-	age: {
-		get: function() { 
-			return this._age;
-		},
+    /** The 'age' property. */
+    age: {
+        get: function() { 
+            return this._age;
+        },
 
-		set: function(value) {
-			if (value < 0)
-				throw new Error("age must be positive");
-			this._age = value;
-		}
-	}
+        set: function(value) {
+            if (value < 0)
+                throw new Error("age must be positive");
+            this._age = value;
+        }
+    }
 });
 
-var p = new Person();
-p.age = 12; // p.age is now 12
-p.age++;    // increments age
-p.age = -1; // throws error
 
+var p = new Person(12);
+p.age += 2; //increases age
+console.log(p.age); //prints 14
+p.age = -1; //throws error
 ```
