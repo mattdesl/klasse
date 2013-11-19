@@ -1,72 +1,102 @@
 var Class = require('./index.js');
+var assert = require("assert");
 
+/////////// Lightweight Mixins
 
-var mix = {
+var mixA = {
+	//simplified klasse format
 	test: {
 		get: function() {
-			return "foo1";
+			return "foo";
+		}
+	},
+
+	_value: 0,
+
+	overrideProperty: "originalProp",
+
+	overrideFunction: function() {
+		return "originalFunc";
+	},
+
+	prop: {
+		get: function() {
+			return this._value;
+		},
+
+		set: function(value) {
+			this._value = value;
+		}
+	},
+
+	override: {
+		get: function() {
+			return "original";
 		}
 	}
 };
 
-Object.defineProperty(mix, "bar", {
+//A true property descriptor
+Object.defineProperty(mixA, "bar", {
 	enumerable: true,
 
 	get: function() {
-		return "bar1";
+		return "bar";
 	}
 });
 
-var Mix2 = new Class({
+/////////// Class Mixins
+var MixB = new Class({
 
-	initialize: function() {
-		this._weight = 0;
+	foobar: function() {
+		return "foobar";
 	},
 
-	weight: {
-		// enumerable: true,
+	override: {
 		get: function() {
-			return this._weight;
+			return "newValue";
 		}
+	},
+
+	overrideProperty: "newProp",
+
+	overrideFunction: function() {
+		return "newFunc";
 	}
-})
+});
 
 var Person = new Class({
 
-	Mixins: [mix, Mix2],
+	Mixins: [mixA, MixB],
 
-	initialize: 
-	function Person(age) {
-		this._age = age || 0;
-		this.property = "blah";
-		Mix2.call(this);
-	},
+	initialize: function() {
+		this._value = 1;
+	}
+});
 
-	protoProperty: "foo",
+describe('mixins', function(){
+    it('should inherit properties & function', function() {
+    	var p = new Person();
+    	//from lightweight mixin object
+    	assert.equal("bar", p.bar); //made with defineProperty
+    	assert.equal("foo", p.test);//made with simplified property
+		assert.equal(1, p.prop)     //simplified property is bound correctly
 
-    /** The 'age' property. */
-    age: {
-        get: function() { 
-            return this._age;
-        },
+		//from Class
+		assert.equal("foobar", p.foobar()); //function is inherited from Class
+	});
 
-        set: function(value) {
-            if (value < 0)
-                throw new Error("age must be positive");
-            this._age = value;
-        }
-    }
+	it('are inheritd in order', function() {
+    	var p = new Person();
+		assert.equal("newValue", p.override);
+		assert.equal("newProp", p.overrideProperty);
+		assert.equal("newFunc", p.overrideFunction());
+    });
 });
 
 
-var p = new Person(12);
-p.age += 2; //increases age
-// console.log(p.age); //prints 14
-// p.age = -1; //throws error
-
-// console.log(Object.getOwnPropertyDescriptor(mix, "bar"))
-
-console.log(p);
-console.log(p.bar);
-console.log(p.test);
-console.log(p.weight);
+//TODO: 
+//Support inheriting from non-configurable properties, e.g. from another class.
+//what to do for multiple mixins ?
+//Every time we find a non-configurable property, we'd have to check other mixins ahead
+//to see if any of them have a property by the same name. if so, we only inherit from later mixins.

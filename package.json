@@ -1,0 +1,25 @@
+{
+  "name": "klasse",
+  "version": "0.0.0",
+  "description": "A minimal class/mixin utility",
+  "main": "index.js",
+  "dependencies": {
+    "nodeunit": "~0.8.2"
+  },
+  "devDependencies": {
+    "nodeunit": "~0.8.2",
+    "mocha": "~1.14.0"
+  },
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattdesl/klasse"
+  },
+  "author": "Matt DesLauriers <mattd@jam3.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/mattdesl/klasse/issues"
+  }
+}

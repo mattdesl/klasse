@@ -18,7 +18,8 @@ function getProperty(definition, k, isClassDescriptor) {
 	if ( hasGetterOrSetter(def) ) {
 		if (typeof def.enumerable === "undefined")
 			def.enumerable = true;
-		
+		if (typeof def.configurable === "undefined")
+			def.configurable = true;
 		return def;
 	} else {
 		return false;
