@@ -69,7 +69,7 @@ var Person = new Class({
 
 	Mixins: [mixA, MixB],
 
-	initialize: function() {
+	initialize: function Person() {
 		this._value = 1;
 	}
 });

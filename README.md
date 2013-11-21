@@ -111,7 +111,7 @@ var Vector3 = new Class({
 });
 ```
 
-## properties
+## "simplified" properties
 
 If an object in the class definition or a mixin has `get` and/or `set` functions, then we assume its a property. It looks like this:
 
@@ -143,3 +143,11 @@ p.age += 2; //increases age
 console.log(p.age); //prints 14
 p.age = -1; //throws error
 ```
+
+Simplified properties are `enumerable` and `configurable` by default, unless otherwise specified. See below.
+
+## final properties
+
+A property which has `configurable` set to false will be considered final. Trying to Extend or Mixin and override such a property will throw an error. You can skip these errors by setting the `Class.ignoreFinals` flag to `true` before creating new classes. Then, only the first instance of that property will be included in your new Class. 
+
+_Note:_ Mixins are inherited before Extends. This may be revised in future versions. 
