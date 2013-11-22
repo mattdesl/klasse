@@ -1,5 +1,3 @@
-var USE_e
-
 function hasGetterOrSetter(def) {
 	return (!!def.get && typeof def.get === "function") || (!!def.set && typeof def.set === "function");
 }
