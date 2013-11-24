@@ -94,9 +94,3 @@ describe('mixins', function(){
     });
 });
 
-
-//TODO: 
-//Support inheriting from non-configurable properties, e.g. from another class.
-//what to do for multiple mixins ?
-//Every time we find a non-configurable property, we'd have to check other mixins ahead
-//to see if any of them have a property by the same name. if so, we only inherit from later mixins.
