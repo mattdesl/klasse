@@ -17,7 +17,7 @@ function getProperty(definition, k, isClassDescriptor) {
 
 
 	//This might be a regular property, or it may be a getter/setter the user defined in a class.
-	if ( hasGetterOrSetter(def) ) {
+	if ( def && hasGetterOrSetter(def) ) {
 		if (typeof def.enumerable === "undefined")
 			def.enumerable = true;
 		if (typeof def.configurable === "undefined")
