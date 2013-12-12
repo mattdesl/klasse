@@ -3,14 +3,8 @@
   "version": "1.0.0",
   "description": "A minimal class/mixin utility",
   "main": "index.js",
-  "dependencies": {
-    "nodeunit": "~0.8.2"
-  },
-  "devDependencies": {
-    "mocha": "~1.14.0"
-  },
   "scripts": {
-    "test": "mocha test.js"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",

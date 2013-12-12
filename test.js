@@ -74,23 +74,25 @@ var Person = new Class({
 	}
 });
 
-describe('mixins', function(){
-    it('should inherit properties & function', function() {
-    	var p = new Person();
-    	//from lightweight mixin object
-    	assert.equal("bar", p.bar); //made with defineProperty
-    	assert.equal("foo", p.test);//made with simplified property
-		assert.equal(1, p.prop)     //simplified property is bound correctly
 
-		//from Class
-		assert.equal("foobar", p.foobar()); //function is inherited from Class
-	});
 
-	it('are inheritd in order', function() {
-    	var p = new Person();
-		assert.equal("newValue", p.override);
-		assert.equal("newProp", p.overrideProperty);
-		assert.equal("newFunc", p.overrideFunction());
-    });
-});
+function test() {
+	var p = new Person();
+	console.log("Testing property & function inheritance...");
 
+	//from lightweight mixin object
+	assert.equal("bar", p.bar); //made with defineProperty
+	assert.equal("foo", p.test);//made with simplified property
+	assert.equal(1, p.prop)     //simplified property is bound correctly
+
+	//from Class
+	assert.equal("foobar", p.foobar()); //function is inherited from Class
+
+	assert.equal("newValue", p.override);
+	assert.equal("newProp", p.overrideProperty);
+	assert.equal("newFunc", p.overrideFunction());
+
+	console.log("ALL OK!")
+}
+
+test();
