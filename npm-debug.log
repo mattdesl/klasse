@@ -7,6 +7,9 @@
 3 info using node@v0.10.20
 4 error Error: Git working directory not clean.
 4 error M .npmignore
+4 error M index.js
+4 error D npm-debug.log
+4 error M package.json
 4 error     at /usr/local/lib/node_modules/npm/lib/version.js:97:35
 4 error     at ChildProcess.exithandler (child_process.js:635:7)
 4 error     at ChildProcess.EventEmitter.emit (events.js:98:17)

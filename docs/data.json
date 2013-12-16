@@ -1,0 +1,53 @@
+{
+    "project": {},
+    "files": {
+        "index.js": {
+            "name": "index.js",
+            "modules": {},
+            "classes": {
+                "Class": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Class": {
+            "name": "Class",
+            "shortname": "Class",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "index.js",
+            "line": 97,
+            "description": "Creates a new class with the given descriptor.\nThe constructor, defined by the name `initialize`,\nis an optional function. If unspecified, an anonymous\nfunction will be used which calls the parent class (if\none exists). \n\nYou can also use `Extends` and `Mixins` to provide subclassing\nand inheritance.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "definition",
+                    "description": "a dictionary of functions for the class",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\n\t\tvar MyClass = new Class({\n\t\t\n\t\t\tinitialize: function() {\n\t\t\t\tthis.foo = 2.0;\n\t\t\t},\n\n\t\t\tbar: function() {\n\t\t\t\treturn this.foo + 5;\n\t\t\t}\n\t\t});"
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "index.js",
+            "line": 83,
+            "class": "Class"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " index.js:83"
+        }
+    ]
+}

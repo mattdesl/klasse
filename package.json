@@ -4,7 +4,11 @@
   "description": "A minimal class/mixin utility",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "browserify": "mkdir -p build && browserify ./index.js --standalone klasse --outfile build/klasse.js",
+    "uglify": "uglifyjs build/klasse.js -o build/klasse.min.js",
+    "yuidoc": "yuidoc -n -o docs .",
+    "build": "npm run-script browserify && npm run-script uglify && npm run-script yuidoc"
   },
   "repository": {
     "type": "git",
