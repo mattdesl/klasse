@@ -7,7 +7,7 @@ A minimal class/mixin utility for JavaScript, focusing on performance, node comp
 Until this is added to the registry, you can install it like so:
 
 ```
-npm install mattdesl/klasse
+npm install klasse
 ```
 
 ## syntax
