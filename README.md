@@ -1,10 +1,10 @@
 # klasse
 
-A minimal class/mixin utility for JavaScript, focusing on performance, node compatibility, and composition over inheritance. 
+A minimal class/mixin utility for JavaScript (ES5+), focusing on performance, node compatibility, and composition over inheritance. 
 
 ## install
 
-Until this is added to the registry, you can install it like so:
+This tool is best used with NodeJS. You can install it like so:
 
 ```
 npm install klasse
@@ -15,6 +15,8 @@ npm install klasse
 Inspired by [MooTools](http://mootools.net/docs/core/Class/Class) and [jsOOP](https://github.com/MikkoH/jsOOP), the syntax is simple and readable:
 
 ```javascript
+var Class = require('klasse');
+
 var MyClass = new Class({
 	
 	//Optional base class to extend from
@@ -46,7 +48,7 @@ Encourages best performance in a number of ways:
 
 ## constructor best practices
 
-- Use a named constructor function so it appears correctly in the debugger, and in stack traces.
+- Use a named constructor function so it appears correctly in the debugger, and in stack traces. This is optional, but leads to clearer debugging.
 - Declare all instance variables for the class up-front in the constructor. This is done for two reasons:
 	1. It's ideal for hidden classes in V8 and other engines.
 	2. If you declare an instance property on the object passed to the `Class` constructor, it will be
