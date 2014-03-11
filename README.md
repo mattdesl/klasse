@@ -151,3 +151,32 @@ Simplified properties are `enumerable` and `configurable` by default, unless oth
 ## final properties
 
 A property which has `configurable` set to false will be considered final. Trying to Extend or Mixin and override such a property will throw an error. You can skip these errors by setting the `Class.ignoreFinals` flag to `true` before creating new classes. Then, only the first instance of that property will be included in your new Class. 
+
+
+## Non-Node environments
+
+You can grab the UMD file from the `build` package, which is namespaced to `klasse`. So your code might look like this:
+
+```
+var MyClass = new klasse.Class({
+	
+	...
+
+});
+```
+
+## building
+
+To build, install the necessary command-line tools:
+
+```
+npm install uglify-js yuidocjs browserify -g
+```
+
+Then run the build script from the project directory:
+
+```
+npm run build
+```
+
+
