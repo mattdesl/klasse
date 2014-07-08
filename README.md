@@ -180,3 +180,8 @@ npm run build
 ```
 
 
+
+
+# License
+
+BSD-2-Clause
