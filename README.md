@@ -1,3 +1,7 @@
+## UNMAINTAINED / DEPRECATED
+
+I no longer use class helpers. I would encourage using ES6 classes if you feel the need to emulate classical OO patterns.
+
 # klasse
 
 A minimal class/mixin utility for JavaScript, focusing on performance, node compatibility, and composition over inheritance. 
