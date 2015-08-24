@@ -4,11 +4,11 @@ I no longer use class helpers. I would encourage using ES6 classes if you feel t
 
 # klasse
 
-A minimal class/mixin utility for JavaScript, focusing on performance, node compatibility, and composition over inheritance. 
+A minimal class/mixin utility for JavaScript (ES5+), focusing on performance, node compatibility, and composition over inheritance. 
 
 ## install
 
-Until this is added to the registry, you can install it like so:
+This tool is best used with NodeJS. You can install it like so:
 
 ```
 npm install klasse
@@ -19,6 +19,8 @@ npm install klasse
 Inspired by [MooTools](http://mootools.net/docs/core/Class/Class) and [jsOOP](https://github.com/MikkoH/jsOOP), the syntax is simple and readable:
 
 ```javascript
+var Class = require('klasse');
+
 var MyClass = new Class({
 	
 	//Optional base class to extend from
@@ -50,7 +52,7 @@ Encourages best performance in a number of ways:
 
 ## constructor best practices
 
-- Use a named constructor function so it appears correctly in the debugger, and in stack traces.
+- Use a named constructor function so it appears correctly in the debugger, and in stack traces. This is optional, but leads to clearer debugging.
 - Declare all instance variables for the class up-front in the constructor. This is done for two reasons:
 	1. It's ideal for hidden classes in V8 and other engines.
 	2. If you declare an instance property on the object passed to the `Class` constructor, it will be
@@ -153,3 +155,37 @@ Simplified properties are `enumerable` and `configurable` by default, unless oth
 ## final properties
 
 A property which has `configurable` set to false will be considered final. Trying to Extend or Mixin and override such a property will throw an error. You can skip these errors by setting the `Class.ignoreFinals` flag to `true` before creating new classes. Then, only the first instance of that property will be included in your new Class. 
+
+
+## Non-Node environments
+
+You can grab the UMD file from the `build` package, which is namespaced to `klasse`. So your code might look like this:
+
+```
+var MyClass = new klasse.Class({
+	
+	...
+
+});
+```
+
+## building
+
+To build, install the necessary command-line tools:
+
+```
+npm install uglify-js yuidocjs browserify -g
+```
+
+Then run the build script from the project directory:
+
+```
+npm run build
+```
+
+
+
+
+# License
+
+BSD-2-Clause
