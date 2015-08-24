@@ -1,10 +1,6 @@
 {
   "name": "klasse",
-<<<<<<< HEAD
-  "version": "1.0.7",
-=======
   "version": "1.0.8",
->>>>>>> f7f46572642593f449c60163364d78d7409add34
   "description": "A minimal class/mixin utility",
   "main": "index.js",
   "scripts": {
